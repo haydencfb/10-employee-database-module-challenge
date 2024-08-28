@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/pg": "^8.11.7",
+    "dotenv": "^16.4.5",
     "inquirer": "^10.1.8"
   }
 }
