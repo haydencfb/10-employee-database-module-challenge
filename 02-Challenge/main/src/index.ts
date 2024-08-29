@@ -43,3 +43,4 @@ function app(): void {
         }
     });
 }
+
