@@ -7,36 +7,36 @@ function app(): void {
         name: 'action',
         message: 'What do you want to do?',
         choices: [
-            'Add employee', 
-            'Add role', 
-            'Add department',
-            'View employees', 
-            'View roles', 
-            'View departments', 
-            'Update employee role', 
+            'View all employees', 
+            'Add Employee', 
+            'Update Employee Role',
+            'View All Roles', 
+            'Add Role', 
+            'View All Departments', 
+            'Add Department', 
             'Exit'
         ]}).then(({ action }) => { 
         switch (action) {
-            case 'Add employee':
+            case 'View all employees':
+                viewAllEmployees();
+                break;
+            case 'Add Employee':
                 addEmployee();
                 break;
-            case 'Add role':
-                addRole();
-                break;
-            case 'Add department':
-                addDepartment();
-                break;
-            case 'View employees':
-                viewEmployees();
-                break;
-            case 'View roles':
-                viewRoles();
-                break;
-            case 'View departments':
-                viewDepartments();
-                break;
-            case 'Update employee role':
+            case 'Update Employee Role':
                 updateEmployeeRole();
+                break;
+            case 'View All Roles':
+                viewAllEmployees();
+                break;
+            case 'Add Role':
+                addRoles();
+                break;
+            case 'View All Departments':
+                viewAllDepartments();
+                break;
+            case 'Add Department':
+                addDepartment();
                 break;
             case 'Exit':
                 process.exit();
