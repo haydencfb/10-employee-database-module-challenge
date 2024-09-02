@@ -27,7 +27,7 @@ function app(): void {
                 updateEmployeeRole();
                 break;
             case 'View All Roles':
-                viewAllEmployees();
+                viewAllRoles();
                 break;
             case 'Add Role':
                 addRoles();
@@ -48,5 +48,12 @@ async function viewAllEmployees(): Promise<void> {
     const sql = "SELECT employee.id, employee.first_name AS 'first name', employee.last_name AS 'last name', role.title, department.name AS department, role.salary, manager.first_name || ' ' || manager.last_name AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id";
     const employees = await pool.query(sql);
     console.table(employees.rows);
+    app();
+}
+
+async function viewAllDepartments(): Promise<void> {
+    const sql = "SELECT * FROM department";
+    const departments = await pool.query(sql);
+    console.table(departments.rows);
     app();
 }
