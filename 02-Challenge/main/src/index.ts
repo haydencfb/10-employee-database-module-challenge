@@ -51,9 +51,17 @@ async function viewAllEmployees(): Promise<void> {
     app();
 }
 
+async function viewAllRoles(): Promise<void> {
+    const sql = "SELECT role.id, role.title, department.name AS department, role.salary FROM role JOIN department ON role.department_id = department.id";
+    const roles = await pool.query(sql);
+    console.table(roles.rows);
+    app();
+}
+
 async function viewAllDepartments(): Promise<void> {
     const sql = "SELECT * FROM department";
     const departments = await pool.query(sql);
     console.table(departments.rows);
     app();
 }
+
