@@ -65,3 +65,4 @@ async function viewAllDepartments(): Promise<void> {
     app();
 }
 
+// macbook needs xcode installed, node installed, homebrew, and postgres
