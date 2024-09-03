@@ -51,6 +51,11 @@ async function viewAllEmployees(): Promise<void> {
     app();
 }
 
+async function addEmployee(): Promise<void> {
+    const roles = await pool.query("SELECT id as value, title as name FROM role");
+    inquirer.prompt([])
+}
+
 async function viewAllRoles(): Promise<void> {
     const sql = "SELECT role.id, role.title, department.name AS department, role.salary FROM role JOIN department ON role.department_id = department.id";
     const roles = await pool.query(sql);
