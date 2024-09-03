@@ -53,7 +53,58 @@ async function viewAllEmployees(): Promise<void> {
 
 async function addEmployee(): Promise<void> {
     const roles = await pool.query("SELECT id as value, title as name FROM role");
-    inquirer.prompt([])
+    const employees = await pool.query("SELECT id as value, first_name || ' ' || last_name as name FROM employee");
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: 'Enter employee first name:'
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'Enter employee last name:'
+        },
+        {
+            type: 'list',
+            name: 'role_id',
+            message: 'Select employee role:',
+            choices: roles.rows
+        },
+        {
+            type: 'list',
+            name: 'manager_id',
+            message: 'Select employee manager:',
+            choices: employees.rows
+        }
+    ]).then(async ({first_name, last_name, role_id, manager_id}) => {
+        await pool.query ("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)", [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
+        console.log('Employee added successfully!');
+        app();
+    });
+}
+
+async function updateEmployeeRole(): Promise<void> {
+    const employees = await pool.query("SELECT id as value, first_name || ' ' || last_name as name FROM employee");
+    const roles = await pool.query("SELECT id as value, title as name FROM role");
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'employee_id',
+            message: 'Select employee to update:',
+            choices: employees.rows
+        },
+        {
+            type: 'list',
+            name: 'role_id',
+            message: 'Select new role:',
+            choices: roles.rows
+        }
+    ]).then(async ({employee_id, role_id}) => {
+        await pool.query("UPDATE employee SET role_id = $1 WHERE id = $2", [role_id, employee_id]);
+        console.log('Employee role updated successfully!');
+        app();
+    });
 }
 
 async function viewAllRoles(): Promise<void> {
@@ -69,5 +120,3 @@ async function viewAllDepartments(): Promise<void> {
     console.table(departments.rows);
     app();
 }
-
-// macbook needs xcode installed, node installed, homebrew, and postgres
