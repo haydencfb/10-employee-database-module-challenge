@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import pool from './db/connection';
+import {pool} from "./db/connection.js";
 
 function app(): void {
     inquirer.prompt({
@@ -45,7 +45,7 @@ function app(): void {
 }
 
 async function viewAllEmployees(): Promise<void> {
-    const sql = "SELECT employee.id, employee.first_name AS 'first name', employee.last_name AS 'last name', role.title, department.name AS department, role.salary, manager.first_name || ' ' || manager.last_name AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id";
+    const sql = "SELECT employee.id, employee.first_name AS \"first name\", employee.last_name AS \"last name\", role.title, department.name AS department, role.salary, manager.first_name || ' ' || manager.last_name AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id;"    
     const employees = await pool.query(sql);
     console.table(employees.rows);
     app();
@@ -112,6 +112,44 @@ async function viewAllRoles(): Promise<void> {
     const roles = await pool.query(sql);
     console.table(roles.rows);
     app();
+}
+
+async function addRoles(): Promise<void> {
+    const departments = await pool.query("SELECT id as value, name as name FROM department");
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'Enter role title:'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'Enter role salary:'
+        },
+        {
+            type: 'list',
+            name: 'department_id',
+            message: 'Select department:',
+            choices: departments.rows
+        }
+    ]).then(async ({title, salary, department_id}) => {
+        await pool.query("INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)", [title, salary, department_id]);
+        console.log('Role added successfully!');
+        app();
+    });
+}
+
+async function addDepartment(): Promise<void> {
+    inquirer.prompt({
+        type: 'input',
+        name: 'name',
+        message: 'Enter department name:'
+    }).then(async ({name}) => {
+        await pool.query("INSERT INTO department (name) VALUES ($1)", [name]);
+        console.log('Department added successfully!');
+        app();
+    });
 }
 
 async function viewAllDepartments(): Promise<void> {
