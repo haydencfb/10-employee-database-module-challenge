@@ -151,3 +151,4 @@ async function viewAllDepartments() {
     console.table(departments.rows);
     app();
 }
+app();

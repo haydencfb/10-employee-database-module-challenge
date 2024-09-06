@@ -158,3 +158,5 @@ async function viewAllDepartments(): Promise<void> {
     console.table(departments.rows);
     app();
 }
+
+app();
