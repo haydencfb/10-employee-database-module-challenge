@@ -18,6 +18,7 @@
  - [License](#license)
   - [Tests](#tests)
   - [Questions](#questions)
+  - [Link](#link)
 
   ## Installation
   Users can install by cloning this repository to their local machine, and upon opening the intergrated terminal through, they can promptly run 'npm i && run build' in order to install all the necessary npm packages as well as begin the build, and run the program following the build.
@@ -39,3 +40,6 @@
 
   ## Questions
   If you have any questions, please feel free to reach out to me at haydenfitzbrintle@gmail.com or visit my GitHub profile at [https://github.com/haydencfb]
+
+  ## Link
+  Link to the Screencastify demonstration video: [https://drive.google.com/file/d/1TXCfNIPAi9T1DYyAQmny8dJPoRYvumrN/view]
