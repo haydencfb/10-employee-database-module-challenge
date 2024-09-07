@@ -42,4 +42,5 @@
   If you have any questions, please feel free to reach out to me at haydenfitzbrintle@gmail.com or visit my GitHub profile at [https://github.com/haydencfb]
 
   ## Link
-  Link to the Screencastify demonstration video: [https://drive.google.com/file/d/1TXCfNIPAi9T1DYyAQmny8dJPoRYvumrN/view]
+  Link to the Screencastify demonstration video: [[https://drive.google.com/file/d/1TXCfNIPAi9T1DYyAQmny8dJPoRYvumrN/view](https://drive.google.com/file/d/1fRjMO2StybLNa3RX2cHQvmSaUDz7wXeO/view)
+  ]
